@@ -75,9 +75,9 @@ public class Mesh {
                 g2.drawLine(bX, bY, cX, cY);
 
                 // FILL THE TRIANGLES!
-                // int[] xPoints = {aX, bX, cX};
-                // int[] yPoints = {aY, bY, cY};
-                // g2.fillPolygon(xPoints, yPoints, 3);
+                int[] xPoints = {aX, bX, cX};
+                int[] yPoints = {aY, bY, cY};
+                g2.fillPolygon(xPoints, yPoints, 3);
             }
         }
     }
@@ -109,16 +109,28 @@ public class Mesh {
         for (var e: triangles) {
             for (var a: e.getVectors()) {
 
-                int x = a.getX();
-                int y = a.getY();
-                int z = a.getZ();
+                int[][] oB3 = matrix.oB3Matrix(a.getX(), a.getY(), a.getZ());
                 
                 double lengthC = java.lang.Math.sqrt(
-                    java.lang.Math.pow(a.getX() - midX, 2) +
-                    java.lang.Math.pow(a.getY() - midY, 2)
+                    java.lang.Math.pow(a.getX(), 2) + java.lang.Math.pow(a.getY(), 2)
                 );
 
-                System.out.println("C: " + lengthC);
+                var lengthB = a.getY();
+                var lengthA = a.getX();
+
+                var cosTheta = lengthB / lengthC;
+                var sinTheta = lengthA / lengthC;
+
+                double[][] aY = {
+                    {cosTheta, 0, sinTheta},
+                    {0, 1, 0},
+                    {-sinTheta, 0, cosTheta}
+                };
+
+                int[][] projection = matrix.projMatMul(aY, oB3);
+
+                a.setVector(projection[0][0], projection[1][0], projection[2][0]);
+
                 if (direction == -1) {
 
                 } else {
