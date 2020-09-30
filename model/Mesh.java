@@ -9,17 +9,11 @@ import java.awt.Color;
 
 public class Mesh {
 
-    private int heading = 180;
-
-    private Matrix matrix;
+    private double heading = 180.0;
+    private double pitch = 0;
 
     int midX = GamePanel3D.WINDOW_WIDTH / 2;
     int midY = GamePanel3D.WINDOW_HEIGHT / 2;
-
-    private Color[] colors = {
-        Color.RED, Color.BLUE, Color.WHITE, Color.CYAN, Color.GREEN, Color.ORANGE,
-        Color.RED, Color.BLUE, Color.WHITE, Color.CYAN, Color.GREEN, Color.ORANGE
-    };
 
     private int scale = 1;
 
@@ -34,7 +28,6 @@ public class Mesh {
     public Mesh() {
         triangles = new ArrayList<>();
         renderState = RenderState.TRIS;
-        matrix = new Matrix();
     }
 
     public void addTriangle(Triangle t) {
@@ -42,6 +35,7 @@ public class Mesh {
     }
 
     public void renderMesh(Graphics2D g2) {
+        int size = 15;
         g2.translate(midX, midY);
         if (renderState == RenderState.VECT) {
             for (var e: triangles) {
@@ -52,22 +46,21 @@ public class Mesh {
                 int cX = (int)(e.getC().getX() * scale); 
                 int cY = (int)(e.getC().getY() * scale); 
                 // A
-                g2.fillOval(aX, aY, 3, 3);
+                g2.fillOval(aX, aY, size, size);
                 
                 // B
-                g2.fillOval(bX, bY, 3, 3);
+                g2.fillOval(bX, bY, size, size);
 
                 // C
-                g2.fillOval(cX, cY, 3, 3);
+                g2.fillOval(cX, cY, size, size);
             }
         }
 
         if (renderState == RenderState.TRIS) {
-            g2.setColor(Color.white);
-            int i = 0;
+            int i = 50;
             for (var e: triangles) {
-                // g2.setColor(colors[i]);
-                // i++;
+                g2.setColor(new Color(i/2, i - 10, i + 30));
+                i += 10;
                 int aX = (int)(e.getA().getX() * scale); 
                 int aY = (int)(e.getA().getY() * scale); 
                 int bX = (int)(e.getB().getX() * scale); 
@@ -93,34 +86,26 @@ public class Mesh {
 
     }
 
-    public void rotateYZ(int direction) {
-        assert(direction == -1 || direction == 1);
+    public void rotateX(int direction) {
+        updatePitch(direction);
+        double cosTheta = Math.cos(Math.toRadians(heading));
+        double sinTheta = Math.sin(Math.toRadians(heading));
+
+        for (var e: triangles) {
+            for (var a: e.getVectors()) {  
+                double x = (a.getX() * 1) + (a.getY() * 0) + (a.getZ() * 0);
+                double y = ((a.getX() * 0) + (a.getY() * cosTheta) + (a.getZ() * -sinTheta));
+                double z = ((a.getX() * 0) + (a.getY() * sinTheta) + (a.getZ() * cosTheta));
+                a.setVector(x, y, z);
+            }
+        }
 
     }
 
-    public void rotateXZ(int direction) {
-        assert(direction == -1 || direction == 1);
-
-        if (direction == -1) {
-            heading -= 1;
-        } else {
-            heading += 1;
-        }
-
-        if (heading > 360) {
-            heading = 0;
-        } else if (heading < 0) {
-            heading = 360;
-        }
-
+    public void rotateY(int direction) {
+        updateHeading(direction);
         double cosTheta = Math.cos(Math.toRadians(heading));
         double sinTheta = Math.sin(Math.toRadians(heading));
-        
-        // double[][] aY = {
-        //     {cosTheta, 0, -sinTheta},
-        //     {0, 1, 0},
-        //     {sinTheta, 0, cosTheta}
-        // };
 
         for (var e: triangles) {
             for (var a: e.getVectors()) {  
@@ -130,5 +115,46 @@ public class Mesh {
                 a.setVector(x, y, z);
             }
         }
+
+        // visualization of matrix
+        // double[][] aY = {
+        //     {cosTheta, 0, -sinTheta},
+        //     {0, 1, 0},
+        //     {sinTheta, 0, cosTheta}
+        // };
+    }
+
+    private void updateHeading(int direction) {
+        assert(direction == -1 || direction == 1);
+        double speed = 1.0;
+        if (direction == -1) {
+            heading -= speed;
+        } else {
+            heading += speed;
+        }
+
+        if (heading > 360) {
+            heading = 0.0;
+        } else if (heading < 0) {
+            heading = 360.0;
+        }
+        System.out.println("Heading: " + heading);
+    }
+
+    private void updatePitch(int direction) {
+        assert(direction == -1 || direction == 1);
+        double speed = 1.0;
+        if (direction == -1) {
+            pitch -= speed;
+        } else {
+            pitch += speed;
+        }
+
+        if (pitch > 90) {
+            pitch = -90.0;
+        } else if (pitch < -90) {
+            pitch = 90.0;
+        }
+        System.out.println("Pitch: " + pitch);
     }
 }

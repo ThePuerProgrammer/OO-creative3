@@ -49,25 +49,25 @@ public class GameCanvas3D extends JPanel {
 
     public void rUp() {
         for (var e: meshes) {
-            e.rotateYZ(1);
+            e.rotateX(1);
         }
     }
 
     public void rDown() {
         for (var e: meshes) {
-            e.rotateYZ(-1);
+            e.rotateX(-1);
         }
     }
 
     public void rLeft() {
         for (var e: meshes) {
-            e.rotateXZ(-1);
+            e.rotateY(-1);
         }
     }
 
     public void rRight() {
         for (var e: meshes) {
-            e.rotateXZ(1);
+            e.rotateY(1);
         }
     }
 
