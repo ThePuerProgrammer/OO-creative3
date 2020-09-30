@@ -15,7 +15,7 @@ public class Mesh {
     int midX = GamePanel3D.WINDOW_WIDTH / 2;
     int midY = GamePanel3D.WINDOW_HEIGHT / 2;
 
-    private int scale = 1;
+    private int scale = 2;
 
     private enum RenderState {
         VECT, TRIS

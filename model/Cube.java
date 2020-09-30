@@ -25,24 +25,24 @@ public class Cube extends Mesh {
                                    new Vector( 100.0,  100.0,  -100.0)));
 
         // right 100.0 -100.0                           
-        triangles.add(new Triangle(new Vector( 100.0, -100.0,  100.0),
-                                   new Vector( 100.0,  100.0,  100.0),
-                                   new Vector( 100.0, -100.0, -100.0)));
+        triangles.add(new Triangle(new Vector( 100.0,  100.0,  100.0),
+                                   new Vector( 100.0,  100.0, -100.0),
+                                   new Vector( 100.0, -100.0,  100.0)));
 
         // right 100.0 100.0                          
-        triangles.add(new Triangle(new Vector( 100.0,  100.0, -100.0),
-                                   new Vector( 100.0, -100.0, -100.0),
-                                   new Vector( 100.0,  100.0,  100.0)));
+        triangles.add(new Triangle(new Vector( 100.0, -100.0, -100.0),
+                                   new Vector( 100.0, -100.0,  100.0),
+                                   new Vector( 100.0,  100.0, -100.0)));
 
         // left -100.0 -100.0                           
-        triangles.add(new Triangle(new Vector(-100.0, -100.0, -100.0),
-                                   new Vector(-100.0,  100.0, -100.0),
-                                   new Vector(-100.0, -100.0,  100.0)));
+        triangles.add(new Triangle(new Vector(-100.0, -100.0,  100.0),
+                                   new Vector(-100.0, -100.0, -100.0),
+                                   new Vector(-100.0,  100.0,  100.0)));
 
         // left -100.0 100.0
-        triangles.add(new Triangle(new Vector(-100.0,  100.0,  100.0),
-                                   new Vector(-100.0, -100.0,  100.0),
-                                   new Vector(-100.0,  100.0, -100.0)));
+        triangles.add(new Triangle(new Vector(-100.0,  100.0, -100.0),
+                                   new Vector(-100.0,  100.0,  100.0),
+                                   new Vector(-100.0, -100.0, -100.0)));
 
         // top -100.0 100.0                    
         triangles.add(new Triangle(new Vector(-100.0,  100.0,  100.0),
