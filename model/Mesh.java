@@ -9,6 +9,8 @@ import java.awt.Color;
 
 public class Mesh {
 
+    private int heading = 180;
+
     private Matrix matrix;
 
     int midX = GamePanel3D.WINDOW_WIDTH / 2;
@@ -40,14 +42,15 @@ public class Mesh {
     }
 
     public void renderMesh(Graphics2D g2) {
+        g2.translate(midX, midY);
         if (renderState == RenderState.VECT) {
             for (var e: triangles) {
-                int aX = midX + (e.getA().getX() * scale); 
-                int aY = midY + (e.getA().getY() * scale); 
-                int bX = midX + (e.getB().getX() * scale); 
-                int bY = midY + (e.getB().getY() * scale); 
-                int cX = midX + (e.getC().getX() * scale); 
-                int cY = midY + (e.getC().getY() * scale); 
+                int aX = (int)(e.getA().getX() * scale); 
+                int aY = (int)(e.getA().getY() * scale); 
+                int bX = (int)(e.getB().getX() * scale); 
+                int bY = (int)(e.getB().getY() * scale); 
+                int cX = (int)(e.getC().getX() * scale); 
+                int cY = (int)(e.getC().getY() * scale); 
                 // A
                 g2.fillOval(aX, aY, 3, 3);
                 
@@ -60,21 +63,24 @@ public class Mesh {
         }
 
         if (renderState == RenderState.TRIS) {
+            g2.setColor(Color.white);
             int i = 0;
             for (var e: triangles) {
-                g2.setColor(colors[i]);
-                i++;
-                int aX = midX + (e.getA().getX() * scale); 
-                int aY = midY + (e.getA().getY() * scale); 
-                int bX = midX + (e.getB().getX() * scale); 
-                int bY = midY + (e.getB().getY() * scale); 
-                int cX = midX + (e.getC().getX() * scale); 
-                int cY = midY + (e.getC().getY() * scale); 
+                // g2.setColor(colors[i]);
+                // i++;
+                int aX = (int)(e.getA().getX() * scale); 
+                int aY = (int)(e.getA().getY() * scale); 
+                int bX = (int)(e.getB().getX() * scale); 
+                int bY = (int)(e.getB().getY() * scale); 
+                int cX = (int)(e.getC().getX() * scale); 
+                int cY = (int)(e.getC().getY() * scale); 
+
+                // lines only!
                 g2.drawLine(aX, aY, bX, bY);
                 g2.drawLine(aX, aY, cX, cY);
                 g2.drawLine(bX, bY, cX, cY);
 
-                // FILL THE TRIANGLES!
+                // // FILL THE TRIANGLES!
                 // int[] xPoints = {aX, bX, cX};
                 // int[] yPoints = {aY, bY, cY};
                 // g2.fillPolygon(xPoints, yPoints, 3);
@@ -84,46 +90,44 @@ public class Mesh {
 
     public void rotateXY(int direction) {
         assert(direction == -1 || direction == 1);
-        for (var e: triangles) {
-            for (var a: e.getVectors()) {
-                if (direction == -1) {
 
-                } else {
-
-                }
-            }
-        }
     }
 
     public void rotateYZ(int direction) {
         assert(direction == -1 || direction == 1);
-        if (direction == -1) {
 
-        } else {
-            
-        }
     }
 
     public void rotateXZ(int direction) {
         assert(direction == -1 || direction == 1);
+
+        if (direction == -1) {
+            heading -= 1;
+        } else {
+            heading += 1;
+        }
+
+        if (heading > 360) {
+            heading = 0;
+        } else if (heading < 0) {
+            heading = 360;
+        }
+
+        double cosTheta = Math.cos(Math.toRadians(heading));
+        double sinTheta = Math.sin(Math.toRadians(heading));
+        
+        // double[][] aY = {
+        //     {cosTheta, 0, -sinTheta},
+        //     {0, 1, 0},
+        //     {sinTheta, 0, cosTheta}
+        // };
+
         for (var e: triangles) {
-            for (var a: e.getVectors()) {
-
-                int x = a.getX();
-                int y = a.getY();
-                int z = a.getZ();
-                
-                double lengthC = java.lang.Math.sqrt(
-                    java.lang.Math.pow(a.getX() - midX, 2) +
-                    java.lang.Math.pow(a.getY() - midY, 2)
-                );
-
-                System.out.println("C: " + lengthC);
-                if (direction == -1) {
-
-                } else {
-                    
-                }
+            for (var a: e.getVectors()) {  
+                double x = (a.getX() * cosTheta) + (a.getY() * 0) + (a.getZ() * sinTheta);
+                double y = ((a.getX() * 0) + (a.getY() * 1) + (a.getZ() * 0));
+                double z = ((a.getX() * -sinTheta) + (a.getY() * 0) + (a.getZ() * cosTheta));
+                a.setVector(x, y, z);
             }
         }
     }
