@@ -9,7 +9,7 @@ import java.awt.Color;
 
 public class Mesh {
 
-    private double heading = 180.0;
+    private double heading = 0.03;
     private double pitch = 0;
 
     int midX = GamePanel3D.WINDOW_WIDTH / 2;
@@ -87,7 +87,7 @@ public class Mesh {
     }
 
     public void rotateX(int direction) {
-        updatePitch(direction);
+        updateHeading(direction);
         double cosTheta = Math.cos(Math.toRadians(heading));
         double sinTheta = Math.sin(Math.toRadians(heading));
 
@@ -126,35 +126,11 @@ public class Mesh {
 
     private void updateHeading(int direction) {
         assert(direction == -1 || direction == 1);
-        double speed = 1.0;
+        double speed = 0.8;
         if (direction == -1) {
-            heading -= speed;
+            heading = speed;
         } else {
-            heading += speed;
+            heading = -speed;
         }
-
-        if (heading > 360) {
-            heading = 0.0;
-        } else if (heading < 0) {
-            heading = 360.0;
-        }
-        System.out.println("Heading: " + heading);
-    }
-
-    private void updatePitch(int direction) {
-        assert(direction == -1 || direction == 1);
-        double speed = 1.0;
-        if (direction == -1) {
-            pitch -= speed;
-        } else {
-            pitch += speed;
-        }
-
-        if (pitch > 90) {
-            pitch = -90.0;
-        } else if (pitch < -90) {
-            pitch = 90.0;
-        }
-        System.out.println("Pitch: " + pitch);
     }
 }
