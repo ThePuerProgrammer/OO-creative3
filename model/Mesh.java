@@ -9,13 +9,15 @@ import java.awt.Color;
 
 public class Mesh {
 
-    private double heading = 0.03;
-    private double pitch = 0;
+    private double heading;
+    private static boolean filled = false;
+    private double cosTheta;
+    private double sinTheta;
 
     int midX = GamePanel3D.WINDOW_WIDTH / 2;
     int midY = GamePanel3D.WINDOW_HEIGHT / 2;
 
-    private int scale = 2;
+    private static double scale = 1.0;
 
     private enum RenderState {
         VECT, TRIS
@@ -73,24 +75,32 @@ public class Mesh {
                 g2.drawLine(aX, aY, cX, cY);
                 g2.drawLine(bX, bY, cX, cY);
 
-                // // FILL THE TRIANGLES!
-                // int[] xPoints = {aX, bX, cX};
-                // int[] yPoints = {aY, bY, cY};
-                // g2.fillPolygon(xPoints, yPoints, 3);
+                if (filled) {
+                    // FILL THE TRIANGLES!
+                    int[] xPoints = {aX, bX, cX};
+                    int[] yPoints = {aY, bY, cY};
+                    g2.fillPolygon(xPoints, yPoints, 3);
+                }
             }
         }
     }
 
-    public void rotateXY(int direction) {
-        assert(direction == -1 || direction == 1);
+    // The following methods use matrix multiplications for rotation around 0,0,0 
+    public void rotateZ(int direction) {
+        updateHeading(direction);
+        for (var e: triangles) {
+            for (var a: e.getVectors()) {  
+                double x = (a.getX() * cosTheta) + (a.getY() * -sinTheta) + (a.getZ() * 0);
+                double y = ((a.getX() * sinTheta) + (a.getY() * cosTheta) + (a.getZ() * 0));
+                double z = ((a.getX() * 0) + (a.getY() * 0) + (a.getZ() * 1));
+                a.setVector(x, y, z);
+            }
+        }
 
     }
 
     public void rotateX(int direction) {
         updateHeading(direction);
-        double cosTheta = Math.cos(Math.toRadians(heading));
-        double sinTheta = Math.sin(Math.toRadians(heading));
-
         for (var e: triangles) {
             for (var a: e.getVectors()) {  
                 double x = (a.getX() * 1) + (a.getY() * 0) + (a.getZ() * 0);
@@ -104,9 +114,6 @@ public class Mesh {
 
     public void rotateY(int direction) {
         updateHeading(direction);
-        double cosTheta = Math.cos(Math.toRadians(heading));
-        double sinTheta = Math.sin(Math.toRadians(heading));
-
         for (var e: triangles) {
             for (var a: e.getVectors()) {  
                 double x = (a.getX() * cosTheta) + (a.getY() * 0) + (a.getZ() * sinTheta);
@@ -115,22 +122,29 @@ public class Mesh {
                 a.setVector(x, y, z);
             }
         }
-
-        // visualization of matrix
-        // double[][] aY = {
-        //     {cosTheta, 0, -sinTheta},
-        //     {0, 1, 0},
-        //     {sinTheta, 0, cosTheta}
-        // };
     }
 
     private void updateHeading(int direction) {
         assert(direction == -1 || direction == 1);
-        double speed = 0.8;
+        int speed = 1;
         if (direction == -1) {
             heading = speed;
         } else {
             heading = -speed;
+        }
+        cosTheta = Math.cos(Math.toRadians(heading));
+        sinTheta = Math.sin(Math.toRadians(heading));
+    }
+
+    public static void setFilled(boolean f) {
+        filled = f;
+    }
+
+    public static void setScale(boolean larger) {
+        if (larger) {
+            scale += 0.1;
+        } else {
+            scale -= 0.1;
         }
     }
 }

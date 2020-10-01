@@ -37,6 +37,9 @@ public class GameCanvas3D extends JPanel {
         g2.setFont(new Font("Courier", Font.PLAIN, 12));
         g2.drawString(fps, 10, 10);
 
+        g2.drawRect(10, 740, 50, 50);
+        g2.fillRect(70, 740, 50, 50);
+
         for (var e: meshes) {
             e.renderMesh(g2);
         }
@@ -73,13 +76,13 @@ public class GameCanvas3D extends JPanel {
 
     public void rClockwise() {
         for (var e: meshes) {
-            e.rotateXY(-1);
+            e.rotateZ(-1);
         }
     }
 
     public void rCounterClockwise() {
         for (var e: meshes) {
-            e.rotateXY(1);
+            e.rotateZ(1);
         }
     }
 

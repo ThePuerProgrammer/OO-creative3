@@ -50,6 +50,7 @@ public class GamePanel3D implements Runnable {
         panel.add(BorderLayout.CENTER, gameCanvas3D);
         gameListener = new GameListener(this);
         window.addKeyListener(gameListener);
+        gameCanvas3D.addMouseListener(gameListener);
         start();
     }
 
