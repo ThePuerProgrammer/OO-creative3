@@ -128,9 +128,13 @@ public class GameListener implements KeyListener, MouseListener {
         int y = e.getY();
 
         if ((x >= 10 && x <= 60) && (y >= 740 && y <= 790)) {
+            Mesh.setRenderState(1);
             Mesh.setFilled(false);
         } else if ((x >= 70 && x <= 120) && (y >= 740 && y <= 790)) {
+            Mesh.setRenderState(1);
             Mesh.setFilled(true);
+        } else if ((x >= 130 && x <= 180) && (y >= 740 && y <= 790)) {
+            Mesh.setRenderState(0);
         }
 
     }

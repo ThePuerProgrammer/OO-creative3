@@ -12,9 +12,11 @@ import java.awt.Font;
 
 import model.Cube;
 import model.Mesh;
+import model.Triangle;
 
 public class GameCanvas3D extends JPanel {
     private String fps = "hi";
+    private String vertices = "";
     private static final long serialVersionUID = 1L;
     private ArrayList<Mesh> meshes;
     private GamePanel3D gamePanel3D;
@@ -36,9 +38,18 @@ public class GameCanvas3D extends JPanel {
         g2.setColor(Color.RED);
         g2.setFont(new Font("Courier", Font.PLAIN, 12));
         g2.drawString(fps, 10, 10);
+        g2.drawString(vertices, 10, 24);
 
         g2.drawRect(10, 740, 50, 50);
         g2.fillRect(70, 740, 50, 50);
+        g2.fillOval(130, 740, 5, 5);
+        g2.fillOval(150, 740, 5, 5);
+        g2.fillOval(175, 740, 5, 5);
+        g2.fillOval(175, 760, 5, 5);
+        g2.fillOval(175, 785, 5, 5);
+        g2.fillOval(150, 785, 5, 5);
+        g2.fillOval(130, 785, 5, 5);
+        g2.fillOval(130, 760, 5, 5);
 
         for (var e: meshes) {
             e.renderMesh(g2);

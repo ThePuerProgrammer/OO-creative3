@@ -1,23 +1,23 @@
 package model;
 
-public class Vector {
+public class Vertex {
     private double x;
     private double y;
     private double z;
 
-    public Vector(double x, double y, double z) {
+    public Vertex(double x, double y, double z) {
         this.x = x;
         this.y = y;
         this.z = z;
     }
 
-    public void setVector(double x, double y, double z) {
+    public void setVertices(double x, double y, double z) {
         this.x = x;
         this.y = y;
         this.z = z;
     }
 
-    public Vector getVector() {
+    public Vertex getVertex() {
         return this;
     }
 
