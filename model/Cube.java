@@ -1,82 +1,93 @@
 package model;
 
 import java.awt.Color;
+import java.util.Random;
 
 public class Cube extends Mesh {
 
     public Cube() {
 
+        Color[] colors = new Color[6];
+        Random random = new Random();
+
+        for (int i = 0; i < 6; i++) {
+            int r = random.nextInt(155) + 100;
+            int g = random.nextInt(155) + 100;
+            int b = random.nextInt(155) + 100;
+            colors[i] = new Color(r, g, b);
+        }
+
         // front -100.0 -100.0
         triangles.add(new Triangle(new Vertex(-100.0, -100.0,  100.0),
                                    new Vertex(-100.0,  100.0,  100.0),
                                    new Vertex( 100.0, -100.0,  100.0),
-                                   new Color(10, 60, 100)));
+                                   colors[0]));
            
         // front 100.0 100.0
         triangles.add(new Triangle(new Vertex( 100.0,  100.0,  100.0),
                                    new Vertex( 100.0, -100.0,  100.0),
                                    new Vertex(-100.0,  100.0,  100.0),
-                                   new Color(60, 150, 30)));
+                                   colors[0]));
 
         // rear -100.0 -100.0
         triangles.add(new Triangle(new Vertex(-100.0,  100.0, -100.0),
                                    new Vertex(-100.0, -100.0, -100.0),
                                    new Vertex( 100.0,  100.0, -100.0),
-                                   new Color(100, 30, 90)));
+                                   colors[1]));
 
         // rear 100.0 100.0
         triangles.add(new Triangle(new Vertex( 100.0, -100.0,  -100.0),
                                    new Vertex( 100.0,  100.0,  -100.0),
                                    new Vertex(-100.0, -100.0,  -100.0),
-                                   new Color(60, 130, 210)));
+                                   colors[1]));
 
         // right 100.0 -100.0                           
         triangles.add(new Triangle(new Vertex( 100.0, -100.0,  100.0),
                                    new Vertex( 100.0,  100.0,  100.0),
                                    new Vertex( 100.0, -100.0, -100.0),
-                                   new Color(150, 200, 60)));
+                                   colors[2]));
 
         // right 100.0 100.0                          
         triangles.add(new Triangle(new Vertex( 100.0,  100.0, -100.0),
                                    new Vertex( 100.0, -100.0, -100.0),
                                    new Vertex( 100.0,  100.0,  100.0),
-                                   new Color(200, 60, 130)));
+                                   colors[2]));
 
         // left -100.0 100.0
         triangles.add(new Triangle(new Vertex(-100.0, -100.0, -100.0),
                                    new Vertex(-100.0,  100.0, -100.0),
                                    new Vertex(-100.0, -100.0,  100.0),
-                                   new Color(60, 190, 30)));
+                                   colors[3]));
 
         // left -100.0 -100.0                           
         triangles.add(new Triangle(new Vertex(-100.0,  100.0,  100.0),
                                    new Vertex(-100.0, -100.0,  100.0),
                                    new Vertex(-100.0,  100.0, -100.0),
-                                   new Color(30, 60, 100)));
+                                   colors[3]));
 
         // top -100.0 100.0                    
         triangles.add(new Triangle(new Vertex(-100.0,  100.0,  100.0),
                                    new Vertex(-100.0,  100.0, -100.0),
                                    new Vertex( 100.0,  100.0,  100.0),
-                                   new Color(100, 30, 60)));
+                                   colors[4]));
 
         // top 100.0 100.0
         triangles.add(new Triangle(new Vertex( 100.0,  100.0, -100.0),
                                    new Vertex( 100.0,  100.0,  100.0),
                                    new Vertex(-100.0,  100.0, -100.0),
-                                   new Color(60, 130, 200)));
+                                   colors[4]));
 
         // bottom -100.0 -100.0
         triangles.add(new Triangle(new Vertex(-100.0, -100.0, -100.0),
                                    new Vertex(-100.0, -100.0,  100.0),
                                    new Vertex( 100.0, -100.0, -100.0),
-                                   new Color(130, 200, 60)));
+                                   colors[5]));
 
         // bottom 100.0 -100.0
         triangles.add(new Triangle(new Vertex( 100.0, -100.0,  100.0),
                                    new Vertex( 100.0, -100.0, -100.0),
                                    new Vertex(-100.0, -100.0,  100.0),
-                                   new Color(200, 60, 130)));
+                                   colors[5]));
     }
     
     public Cube getCube() {

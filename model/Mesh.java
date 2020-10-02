@@ -20,7 +20,7 @@ public class Mesh {
     private static double scale = 1.0;
 
     private enum RenderState {
-        VECT, TRIS
+        VERT, TRIS
     }
 
     private static RenderState renderState;
@@ -37,7 +37,7 @@ public class Mesh {
 
     public Mesh() {
         triangles = new ArrayList<>();
-        renderState = RenderState.VECT;
+        renderState = RenderState.VERT;
     }
 
     public void addTriangle(Triangle t) {
@@ -45,10 +45,10 @@ public class Mesh {
     }
 
     public void renderMesh(Graphics2D g2) {
-        int size = 15;
+        int vertSize = 15;
         g2.translate(midX, midY);
 
-        if (renderState == RenderState.VECT) {
+        if (renderState == RenderState.VERT) {
             for (var e: triangles) {
                 int aX = (int)(e.getA().getX() * scale); 
                 int aY = (int)(e.getA().getY() * scale); 
@@ -57,37 +57,50 @@ public class Mesh {
                 int cX = (int)(e.getC().getX() * scale); 
                 int cY = (int)(e.getC().getY() * scale); 
                 // A
-                g2.fillOval(aX, aY, size, size);
+                g2.fillOval(aX, aY, vertSize, vertSize);
                 
                 // B
-                g2.fillOval(bX, bY, size, size);
+                g2.fillOval(bX, bY, vertSize, vertSize);
 
                 // C
-                g2.fillOval(cX, cY, size, size);
+                g2.fillOval(cX, cY, vertSize, vertSize);
             }
         }
 
         if (renderState == RenderState.TRIS) {
+            int i = 20;
             for (var e: triangles) {
                 Vertex normal = VMath.normalVectorN(e.getA(), e.getB(), e.getC());
                 int aX = (int)(e.getA().getX() * scale); 
                 int aY = (int)(e.getA().getY() * scale); 
+                int aZ = (int)(e.getA().getZ() * scale);
                 int bX = (int)(e.getB().getX() * scale); 
                 int bY = (int)(e.getB().getY() * scale); 
+                int bZ = (int)(e.getB().getZ() * scale); 
                 int cX = (int)(e.getC().getX() * scale); 
                 int cY = (int)(e.getC().getY() * scale); 
+                int cZ = (int)(e.getC().getZ() * scale); 
 
                 if (!filled) {
                     g2.setColor(new Color(50, 40, 200));
                     // lines only!
                     g2.drawLine(aX, aY, bX, bY);
                     g2.drawLine(aX, aY, cX, cY);
-                    g2.drawLine(bX, bY, cX, cY);
+                    // g2.drawLine(bX, bY, cX, cY);
                 }
 
                 if (filled) {
-                    if (normal.getZ() < 0.0) {
+                    if (normal.getZ() > 0.0) {
+
                         g2.setColor(e.getColor());
+                        g2.drawString(
+                            "aX: " + aX + ", aY: " + aY + ", aZ: " + aZ +
+                            ", bX: " + bX + ", bY: " + bY + ", bZ: " + bZ +
+                            ", cX: " + cX + ", cY: " + cY + ", cZ: " + cZ, 
+                            -390, -390 + i
+                        );
+
+                        i += 15;
                         // FILL THE TRIANGLES!
                         int[] xPoints = {aX, bX, cX};
                         int[] yPoints = {aY, bY, cY};
@@ -164,7 +177,7 @@ public class Mesh {
 
     public static void setRenderState(int rS) {
         if (rS == 0) {
-            renderState = RenderState.VECT;
+            renderState = RenderState.VERT;
         } else if (rS == 1) {
             renderState = RenderState.TRIS;
         }
