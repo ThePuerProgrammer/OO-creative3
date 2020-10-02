@@ -14,8 +14,8 @@ public class Mesh {
     private double cosTheta;
     private double sinTheta;
 
-    int midX = GamePanel3D.WINDOW_WIDTH / 2;
-    int midY = GamePanel3D.WINDOW_HEIGHT / 2;
+    final private int midX = GamePanel3D.WINDOW_WIDTH / 2;
+    final private int midY = GamePanel3D.WINDOW_HEIGHT / 2;
 
     private static double scale = 1.0;
 
@@ -68,7 +68,6 @@ public class Mesh {
         }
 
         if (renderState == RenderState.TRIS) {
-            // int i = 0;
             for (var e: triangles) {
                 Vertex normal = VMath.normalVectorN(e.getA(), e.getB(), e.getC());
                 int aX = (int)(e.getA().getX() * scale); 
@@ -78,15 +77,9 @@ public class Mesh {
                 int cX = (int)(e.getC().getX() * scale); 
                 int cY = (int)(e.getC().getY() * scale); 
 
-                // System.out.println("Triangle " + tris[i] +
-                //                    ", nomalX: " + normal.getX() +
-                //                    ", normalY: " + normal.getY() +
-                //                    ", normalZ: " + normal.getZ());
-                
-                // i++;
                 if (!filled) {
                     g2.setColor(new Color(50, 40, 200));
-                        // lines only!
+                    // lines only!
                     g2.drawLine(aX, aY, bX, bY);
                     g2.drawLine(aX, aY, cX, cY);
                     g2.drawLine(bX, bY, cX, cY);
@@ -99,7 +92,6 @@ public class Mesh {
                         int[] xPoints = {aX, bX, cX};
                         int[] yPoints = {aY, bY, cY};
                         g2.fillPolygon(xPoints, yPoints, 3);
-                        System.out.println(e.getName());
                     }
                 }
             }
@@ -145,6 +137,7 @@ public class Mesh {
         }
     }
 
+    // direction of movement
     private void updateHeading(int direction) {
         assert(direction == -1 || direction == 1);
         int speed = 1;
