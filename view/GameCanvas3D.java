@@ -12,7 +12,6 @@ import java.awt.Font;
 
 import model.Cube;
 import model.Mesh;
-import model.Triangle;
 
 public class GameCanvas3D extends JPanel {
     private String fps = "hi";
@@ -50,6 +49,7 @@ public class GameCanvas3D extends JPanel {
         g2.fillOval(150, 785, 5, 5);
         g2.fillOval(130, 785, 5, 5);
         g2.fillOval(130, 760, 5, 5);
+
 
         for (var e: meshes) {
             e.renderMesh(g2);
@@ -97,13 +97,31 @@ public class GameCanvas3D extends JPanel {
         }
     }
 
+    public void shiftUp() {
+        for (var m: meshes) {
+            m.shiftUp();
+        }
+    }
+
+    public void shiftDown() {
+        for (var m: meshes) {
+            m.shiftDown();
+        }
+    }
+
+    public void shiftLeft() {
+        for (var m: meshes) {
+            m.shiftLeft();
+        }
+    }
+
+    public void shiftRight() {
+        for (var m: meshes) {
+            m.shiftRight();
+        }
+    }
+
     public void setString(String fps) {
         this.fps = fps;
     }
-
-    // public void addCube() {
-    //     Mesh cube = new Cube();
-    //     meshes.add(cube);
-    // }
-
 }

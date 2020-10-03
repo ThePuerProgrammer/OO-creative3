@@ -18,6 +18,7 @@ public class Mesh {
     final private int midY = GamePanel3D.WINDOW_HEIGHT / 2;
 
     private static double scale = 1.0;
+    private final int shiftSpeed = 5;
 
     private enum RenderState {
         VERT, TRIS
@@ -45,7 +46,7 @@ public class Mesh {
     }
 
     public void renderMesh(Graphics2D g2) {
-        int vertSize = 15;
+        final int vertSize = 5;
         g2.translate(midX, midY);
 
         if (renderState == RenderState.VERT) {
@@ -56,6 +57,7 @@ public class Mesh {
                 int bY = (int)(e.getB().getY() * scale); 
                 int cX = (int)(e.getC().getX() * scale); 
                 int cY = (int)(e.getC().getY() * scale); 
+
                 // A
                 g2.fillOval(aX, aY, vertSize, vertSize);
                 
@@ -93,18 +95,19 @@ public class Mesh {
                     if (normal.getZ() > 0.0) {
 
                         g2.setColor(e.getColor());
+                        i += 15;
+                        // FILL THE TRIANGLES! Woo!
+                        int[] xPoints = {aX, bX, cX};
+                        int[] yPoints = {aY, bY, cY};
+                        g2.fillPolygon(xPoints, yPoints, 3);
+
+                        // print coordinates
                         g2.drawString(
                             "aX: " + aX + ", aY: " + aY + ", aZ: " + aZ +
                             ", bX: " + bX + ", bY: " + bY + ", bZ: " + bZ +
                             ", cX: " + cX + ", cY: " + cY + ", cZ: " + cZ, 
                             -390, -390 + i
                         );
-
-                        i += 15;
-                        // FILL THE TRIANGLES!
-                        int[] xPoints = {aX, bX, cX};
-                        int[] yPoints = {aY, bY, cY};
-                        g2.fillPolygon(xPoints, yPoints, 3);
                     }
                 }
             }
@@ -122,7 +125,6 @@ public class Mesh {
                 a.setVertices(x, y, z);
             }
         }
-
     }
 
     public void rotateX(int direction) {
@@ -182,6 +184,39 @@ public class Mesh {
             renderState = RenderState.TRIS;
         }
     }
+
+    public void shiftUp() {
+        for (var e: triangles) {
+            for (var a: e.getVertices()) {
+                a.setVertices(a.getX(), a.getY() - shiftSpeed, a.getZ());
+            }
+        }
+    }
+
+    public void shiftDown() {
+        for (var e: triangles) {
+            for (var a: e.getVertices()) {
+                a.setVertices(a.getX(), a.getY() + shiftSpeed, a.getZ());
+            }
+        }
+    }
+
+    public void shiftLeft() {
+        for (var e: triangles) {
+            for (var a: e.getVertices()) {
+                a.setVertices(a.getX() - shiftSpeed, a.getY(), a.getZ());
+            }
+        }
+    }
+
+    public void shiftRight() {
+        for (var e: triangles) {
+            for (var a: e.getVertices()) {
+                a.setVertices(a.getX() + shiftSpeed, a.getY(), a.getZ());
+            }
+        }
+    }
+
 
     public ArrayList<Triangle> getTriangles() {
         return triangles;

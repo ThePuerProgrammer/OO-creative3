@@ -32,6 +32,10 @@ public class GamePanel3D implements Runnable {
     private boolean rotateRight = false;
     private boolean rotateClockwise = false;
     private boolean rotateCounterClockwise = false;
+    private boolean shiftUp = false;
+    private boolean shiftDown = false;
+    private boolean shiftLeft = false;
+    private boolean shiftRight = false;
 
     public GamePanel3D(JFrame window) {
         this.window = window;
@@ -102,6 +106,18 @@ public class GamePanel3D implements Runnable {
             gameCanvas3D.rCounterClockwise();
         }
 
+        if (shiftUp) {
+            gameCanvas3D.shiftUp();
+        } else if (shiftDown) {
+            gameCanvas3D.shiftDown();
+        }
+
+        if (shiftLeft) {
+            gameCanvas3D.shiftLeft();
+        } else if (shiftRight) {
+            gameCanvas3D.shiftRight();
+        }
+
     }
 
     public void setRotateUp(boolean rotateUp) {
@@ -126,5 +142,21 @@ public class GamePanel3D implements Runnable {
 
     public void setRotateCounterClockwise(boolean rotateCounterClockwise) {
         this.rotateCounterClockwise = rotateCounterClockwise;
+    }
+
+    public void setShiftDown(boolean shiftDown) {
+        this.shiftDown = shiftDown;
+    }
+
+    public void setShiftUp(boolean shiftUp) {
+        this.shiftUp = shiftUp;
+    }
+
+    public void setShiftLeft(boolean shiftLeft) {
+        this.shiftLeft = shiftLeft;
+    }
+
+    public void setShiftRight(boolean shiftRight) {
+        this.shiftRight = shiftRight;
     }
 }

@@ -24,6 +24,22 @@ public class GameListener implements KeyListener, MouseListener {
     public void keyPressed(KeyEvent e) {
         if (gamePanel3D.gameState == GameState.RUNNING) {
             switch (e.getKeyCode()) {
+                // w 
+                case 0x57: 
+                    gamePanel3D.setShiftUp(true);
+                    break;
+                // a
+                case 0x41:
+                    gamePanel3D.setShiftLeft(true);
+                    break;
+                // s
+                case 0x53:
+                    gamePanel3D.setShiftDown(true);
+                    break;
+                // d
+                case 0x44:
+                    gamePanel3D.setShiftRight(true);
+                    break;
                 // 'c'
                 case 0x43:
                     zAxisRotation = true;
@@ -78,6 +94,22 @@ public class GameListener implements KeyListener, MouseListener {
     public void keyReleased(KeyEvent e) {
         if (gamePanel3D.gameState == GameState.RUNNING) {
             switch (e.getKeyCode()) {
+                // w 
+                case 0x57: 
+                    gamePanel3D.setShiftUp(false);
+                    break;
+                // a
+                case 0x41:
+                    gamePanel3D.setShiftLeft(false);
+                    break;
+                // s
+                case 0x53:
+                    gamePanel3D.setShiftDown(false);
+                    break;
+                // d
+                case 0x44:
+                    gamePanel3D.setShiftRight(false);
+                    break;
                 // 'c'
                 case 0x43:
                     zAxisRotation = false;
