@@ -1,6 +1,8 @@
 package model;
 
-public class VMath {
+
+// MATH CLASS FOR VERTEX MANIPULATION WITH STATIC METHODS
+public final class VMath {
 
     public VMath() {}
 
@@ -17,8 +19,8 @@ public class VMath {
         return new Vertex(nX, nY, nZ);
     }
 
-    // Matrix multiplier!! It works!! :D 
-    public double[][] matMul(double[][] matrix, double[][] vertices) {
+    // 2D Matrix multiplier!! It works!! :D 
+    public static double[][] matMul2D(double[][] matrix, double[][] vertices) {
         double[][] result = new double[vertices.length][vertices[0].length];
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < vertices[0].length; j++) {
@@ -28,5 +30,14 @@ public class VMath {
             }
         }
         return result;
+    }
+
+    public static double[][] convertVertexToMatrix(Vertex a) {
+        double[][] vertex = {
+            {a.getX()},
+            {a.getY()},
+            {a.getZ()}
+        };
+        return vertex;
     }
 }

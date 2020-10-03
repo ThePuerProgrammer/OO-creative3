@@ -24,7 +24,7 @@ public class GameCanvas3D extends JPanel {
     public GameCanvas3D(GamePanel3D gamePanel3D) {
         this.gamePanel3D = gamePanel3D;
         setPreferredSize(new Dimension(GamePanel3D.WINDOW_WIDTH, GamePanel3D.WINDOW_HEIGHT));
-        setBackground(new Color(0 , 0, 30));
+        setBackground(new Color(0 , 0, 10));
         meshes = new ArrayList<>();
         meshes.add(new Cube());
     } 

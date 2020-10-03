@@ -63,7 +63,7 @@ public class GameListener implements KeyListener, MouseListener {
                     gamePanel3D.setRotateUp(true);
                     gamePanel3D.setRotateDown(false);
                 } else {
-                    Mesh.setScale(true);
+                    Mesh.setScale(0.01);
                 }
                     break;
                 // right arrow key
@@ -82,7 +82,7 @@ public class GameListener implements KeyListener, MouseListener {
                     gamePanel3D.setRotateDown(true);
                     gamePanel3D.setRotateUp(false);
                 } else {
-                    Mesh.setScale(false);
+                    Mesh.setScale(-0.01);
                 }
                     break;
 
@@ -156,13 +156,11 @@ public class GameListener implements KeyListener, MouseListener {
         int y = e.getY();
 
         if ((x >= 10 && x <= 60) && (y >= 740 && y <= 790)) {
-            Mesh.setRenderState(1);
-            Mesh.setFilled(false);
+            Mesh.setRenderState(0);
         } else if ((x >= 70 && x <= 120) && (y >= 740 && y <= 790)) {
             Mesh.setRenderState(1);
-            Mesh.setFilled(true);
         } else if ((x >= 130 && x <= 180) && (y >= 740 && y <= 790)) {
-            Mesh.setRenderState(0);
+            Mesh.setRenderState(2);
         }
 
     }
