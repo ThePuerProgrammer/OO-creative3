@@ -185,6 +185,8 @@ public class Mesh {
         }
     }
 
+    // The following shift methods place the vertices further into orbit from (0,0,0)
+
     public void shiftUp() {
         for (var e: triangles) {
             for (var a: e.getVertices()) {
