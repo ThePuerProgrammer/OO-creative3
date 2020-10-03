@@ -19,6 +19,7 @@ public class Mesh {
 
     private static double scale = 1.0;
     private final int shiftSpeed = 5;
+    private final int headingSpeed = 3;
 
     private enum RenderState {
         VERT, TRIS
@@ -155,11 +156,10 @@ public class Mesh {
     // direction of movement
     private void updateHeading(int direction) {
         assert(direction == -1 || direction == 1);
-        int speed = 1;
         if (direction == -1) {
-            heading = speed;
+            heading = headingSpeed;
         } else {
-            heading = -speed;
+            heading = -headingSpeed;
         }
         cosTheta = Math.cos(Math.toRadians(heading));
         sinTheta = Math.sin(Math.toRadians(heading));
