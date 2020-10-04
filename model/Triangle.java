@@ -3,7 +3,7 @@ package model;
 import java.awt.Color;
 public class Triangle {
     private Vertex[] vertices;
-    Color color;
+    private Color color;
 
 
     public Triangle(Vertex a, Vertex b, Vertex c) {
@@ -43,5 +43,9 @@ public class Triangle {
 
     public Color getColor() {
         return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 }

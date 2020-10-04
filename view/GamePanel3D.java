@@ -22,8 +22,8 @@ public class GamePanel3D implements Runnable {
     private GameListener gameListener;
     public static final int WINDOW_HEIGHT = 800;
     public static final int WINDOW_WIDTH  = 800;
-    private final int fps = 60;
-    private final int time = 1000 / fps;
+    private final int FPS = 60;
+    private final int TIME = 1000 / FPS;
     private Thread thread;
 
     private boolean rotateUp = false;
@@ -72,7 +72,7 @@ public class GamePanel3D implements Runnable {
             tick();
             gameCanvas3D.repaint();
             long updated = System.nanoTime() - nano;
-            long buffer = time - updated / 1_000_000;
+            long buffer = TIME - updated / 1_000_000;
             gameCanvas3D.setString("buffer: " + buffer + ", nano: " + nano + ", updated: " + updated);
             if (buffer <= 0) {
                 buffer = 5;
@@ -164,8 +164,12 @@ public class GamePanel3D implements Runnable {
         gameCanvas3D.addCube();
     }
 
-    public void addPyramidToCanvas() {
-        gameCanvas3D.addPyramid();
+    public void addOctahedronToCanvas() {
+        gameCanvas3D.addOctahedron();
+    }
+
+    public void addSphereToCanvas() {
+        gameCanvas3D.addSphere();
     }
 
     public void clearCanvas() {

@@ -1,8 +1,5 @@
 package model;
 
-import java.awt.Color;
-import java.util.Random;
-
 public class Cube extends Mesh {
 
     public Cube() {
@@ -82,16 +79,6 @@ public class Cube extends Mesh {
 
     // overloaded constructor for different bounds
     public Cube(int bound) {
-
-        Color[] colors = new Color[6];
-        Random random = new Random();
-
-        for (int i = 0; i < 6; i++) {
-            int r = random.nextInt(155) + 100;
-            int g = random.nextInt(155) + 100;
-            int b = random.nextInt(155) + 100;
-            colors[i] = new Color(r, g, b);
-        }
 
         // front -bound -bound
         triangles.add(new Triangle(new Vertex(-bound, -bound,  bound),

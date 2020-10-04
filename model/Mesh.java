@@ -19,6 +19,7 @@ public class Mesh {
     private int midX = GamePanel3D.WINDOW_WIDTH / 2;
     private int midY = GamePanel3D.WINDOW_HEIGHT / 2;
     private int headingSpeed = 2;
+    private Color verticesColor = new Color(0, 220, 110);
 
     private enum RenderState {
         TRIS, SOLID, VERT
@@ -28,8 +29,8 @@ public class Mesh {
     private static double scale = 1.0;
     public static int numOfMeshes = 0;
 
-    private final int shiftSpeed = 5;
-    private final int vertSize = 10;
+    private final int SHIFT_SPEED = 5;
+    private final int VERT_SIZE = 10;
 
     protected ArrayList<Triangle> triangles;
     protected Color[] colors;
@@ -38,16 +39,15 @@ public class Mesh {
     public Mesh() {
         triangles = new ArrayList<>();
         setRenderState(2);
-        colors = new Color[6];
+        colors = new Color[12];
         random = new Random();
 
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 12; i++) {
             int r = random.nextInt(155) + 100;
             int g = random.nextInt(155) + 100;
             int b = random.nextInt(155) + 100;
             colors[i] = new Color(r, g, b);
         }
-
         numOfMeshes++;
     }
 
@@ -59,12 +59,12 @@ public class Mesh {
         g2.translate(midX, midY);
         if (renderState == RenderState.VERT) {
             // Verticies only!
-            g2.setColor(Color.GREEN);
+            g2.setColor(verticesColor);
             for (var e: triangles) {
                 int[] scaled = scaleTriangleVertices(e);
-                g2.fillOval(scaled[0], scaled[1], vertSize, vertSize);
-                g2.fillOval(scaled[3], scaled[4], vertSize, vertSize);
-                g2.fillOval(scaled[6], scaled[7], vertSize, vertSize);
+                g2.fillOval(scaled[0], scaled[1], VERT_SIZE, VERT_SIZE);
+                g2.fillOval(scaled[3], scaled[4], VERT_SIZE, VERT_SIZE);
+                g2.fillOval(scaled[6], scaled[7], VERT_SIZE, VERT_SIZE);
             }
         } else if (renderState == RenderState.TRIS) {
             // lines only!
@@ -184,6 +184,10 @@ public class Mesh {
         scale += s;
     }
 
+    public static void resetScale() {
+        scale = 1.0;
+    }
+
     public static void setRenderState(int rS) {
         assert (rS >= 0 && rS <= 2);
         if (rS == 2) {
@@ -199,7 +203,7 @@ public class Mesh {
     public void shiftUp() {
         for (var e: triangles) {
             for (var a: e.getVertices()) {
-                a.setVertices(a.getX(), a.getY() - shiftSpeed, a.getZ());
+                a.setVertices(a.getX(), a.getY() - SHIFT_SPEED, a.getZ());
             }
         }
     }
@@ -207,7 +211,7 @@ public class Mesh {
     public void shiftDown() {
         for (var e: triangles) {
             for (var a: e.getVertices()) {
-                a.setVertices(a.getX(), a.getY() + shiftSpeed, a.getZ());
+                a.setVertices(a.getX(), a.getY() + SHIFT_SPEED, a.getZ());
             }
         }
     }
@@ -215,7 +219,7 @@ public class Mesh {
     public void shiftLeft() {
         for (var e: triangles) {
             for (var a: e.getVertices()) {
-                a.setVertices(a.getX() - shiftSpeed, a.getY(), a.getZ());
+                a.setVertices(a.getX() - SHIFT_SPEED, a.getY(), a.getZ());
             }
         }
     }
@@ -223,7 +227,7 @@ public class Mesh {
     public void shiftRight() {
         for (var e: triangles) {
             for (var a: e.getVertices()) {
-                a.setVertices(a.getX() + shiftSpeed, a.getY(), a.getZ());
+                a.setVertices(a.getX() + SHIFT_SPEED, a.getY(), a.getZ());
             }
         }
     }

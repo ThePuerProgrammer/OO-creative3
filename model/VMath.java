@@ -1,7 +1,6 @@
 package model;
 
-
-// MATH CLASS FOR VERTEX MANIPULATION WITH STATIC METHODS
+// Math class for vertex manipulation with static methods
 public final class VMath {
 
     public VMath() {}
