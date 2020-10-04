@@ -31,6 +31,7 @@ public class Mesh {
 
     private final int SHIFT_SPEED = 5;
     private final int VERT_SIZE = 10;
+    private final int VERT_OFFSET = VERT_SIZE / 2;
 
     protected ArrayList<Triangle> triangles;
     protected Color[] colors;
@@ -39,10 +40,10 @@ public class Mesh {
     public Mesh() {
         triangles = new ArrayList<>();
         setRenderState(2);
-        colors = new Color[12];
+        colors = new Color[25 * 20];
         random = new Random();
 
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < 25 * 20; i++) {
             int r = random.nextInt(155) + 100;
             int g = random.nextInt(155) + 100;
             int b = random.nextInt(155) + 100;
@@ -62,9 +63,11 @@ public class Mesh {
             g2.setColor(verticesColor);
             for (var e: triangles) {
                 int[] scaled = scaleTriangleVertices(e);
-                g2.fillOval(scaled[0], scaled[1], VERT_SIZE, VERT_SIZE);
-                g2.fillOval(scaled[3], scaled[4], VERT_SIZE, VERT_SIZE);
-                g2.fillOval(scaled[6], scaled[7], VERT_SIZE, VERT_SIZE);
+                g2.fillOval(scaled[0] - VERT_OFFSET, scaled[1] - VERT_OFFSET, VERT_SIZE, VERT_SIZE);
+                g2.fillOval(scaled[3] - VERT_OFFSET, scaled[4] - VERT_OFFSET, VERT_SIZE, VERT_SIZE);
+                g2.fillOval(scaled[6] - VERT_OFFSET, scaled[7] - VERT_OFFSET, VERT_SIZE, VERT_SIZE);
+
+                g2.drawString(e.getA().getName(), scaled[0] + 5, scaled[1] - 10);
             }
         } else if (renderState == RenderState.TRIS) {
             // lines only!

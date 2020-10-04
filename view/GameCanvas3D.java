@@ -16,8 +16,7 @@ import model.Octahedron;
 import model.Sphere;
 
 public class GameCanvas3D extends JPanel {
-    private String fps = "hi";
-    private String vertices = "";
+    private String fps = "";
     private static final long serialVersionUID = 1L;
     private ArrayList<Mesh> meshes;
     private GamePanel3D gamePanel3D;
@@ -25,6 +24,9 @@ public class GameCanvas3D extends JPanel {
     
     private final int[] TRIANGLE_ICON_X = {740, 765, 790};
     private final int[] TRIANGLE_ICON_Y = {790, 740, 790};
+    private final int HEIGHT = GamePanel3D.WINDOW_HEIGHT;
+    private final int WIDTH = GamePanel3D.WINDOW_WIDTH;
+    private final Color grid = new Color(30, 30, 30);
 
     public static Color squareIconColor;
     public static Color triangleIconColor;
@@ -35,7 +37,7 @@ public class GameCanvas3D extends JPanel {
 
     public GameCanvas3D(GamePanel3D gamePanel3D) {
         this.gamePanel3D = gamePanel3D;
-        setPreferredSize(new Dimension(GamePanel3D.WINDOW_WIDTH, GamePanel3D.WINDOW_HEIGHT));
+        setPreferredSize(new Dimension(WIDTH, HEIGHT));
         setBackground(new Color(0 , 0, 10));
         meshes = new ArrayList<>();
         meshes.add(new Cube());
@@ -48,10 +50,24 @@ public class GameCanvas3D extends JPanel {
         super.paintComponent(g);
         g2 = (Graphics2D) g;
 
+        // grid lines
+        g2.setColor(grid);
+        // vertical
+        for (int i = 1; i < 16; i++) {
+            g2.drawLine(WIDTH / 16 * i, 0, WIDTH / 16 * i, HEIGHT);
+        }
+        // horizontal
+        for (int i = 1; i < 16; i++) {
+            g2.drawLine(0, HEIGHT / 16 * i, WIDTH, HEIGHT / 16 * i);
+        }
+        // (0,0,0)
+        g2.setColor(new Color(50, 10, 10));
+        g2.drawLine(WIDTH / 2, 0, WIDTH / 2, HEIGHT);
+        g2.drawLine(0, HEIGHT / 2, WIDTH, HEIGHT / 2);
+
         g2.setColor(Color.RED);
         g2.setFont(new Font("Courier", Font.PLAIN, 12));
         g2.drawString(fps, 10, 10);
-        g2.drawString(vertices, 10, 24);
 
         g2.setColor(wireframeColor);
         g2.drawRect(10, 740, 50, 50);
