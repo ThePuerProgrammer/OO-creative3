@@ -67,7 +67,6 @@ public class Mesh {
                 g2.fillOval(scaled[3] - VERT_OFFSET, scaled[4] - VERT_OFFSET, VERT_SIZE, VERT_SIZE);
                 g2.fillOval(scaled[6] - VERT_OFFSET, scaled[7] - VERT_OFFSET, VERT_SIZE, VERT_SIZE);
 
-                g2.drawString(e.getA().getName(), scaled[0] + 5, scaled[1] - 10);
             }
         } else if (renderState == RenderState.TRIS) {
             // lines only!

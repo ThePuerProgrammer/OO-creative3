@@ -173,7 +173,6 @@ public class GameListener implements KeyListener, MouseListener {
             gamePanel3D.addSphereToCanvas();
             Mesh.resetScale();
             GameCanvas3D.sphereIconColor = Color.WHITE;
-            // Mesh.setScale(100);
         } else if ((x >= 680 && x <= 730) && (y >= 740 && y <= 790)) {
             gamePanel3D.clearCanvas();
             gamePanel3D.addCubeToCanvas();

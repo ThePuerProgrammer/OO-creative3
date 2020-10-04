@@ -9,6 +9,8 @@ public class Sphere extends Mesh {
 
     // The big leagues
     public Sphere() {
+
+        // bua
         triangles.add(new Triangle(
             new Vertex(      100, -GOLDEN,       0),
             new Vertex(        0,    -100,  GOLDEN),
@@ -103,6 +105,7 @@ public class Sphere extends Mesh {
             new Vertex(-GOLDEN,       0,     100),
             colors[11])
         );
+
         // yef
         triangles.add(new Triangle(
             new Vertex(   -100,  GOLDEN,       0),
@@ -118,6 +121,7 @@ public class Sphere extends Mesh {
             new Vertex( GOLDEN,       0,    -100),
             colors[13])
         );
+
         // zdc
         triangles.add(new Triangle(
             new Vertex(    100,  GOLDEN,       0),
@@ -125,6 +129,7 @@ public class Sphere extends Mesh {
             new Vertex( GOLDEN,       0,    -100),
             colors[14])
         );
+
         // yzx
         triangles.add(new Triangle(
             new Vertex(   -100,  GOLDEN,       0),
@@ -132,6 +137,7 @@ public class Sphere extends Mesh {
             new Vertex(      0,     100, -GOLDEN),
             colors[15])
         );
+
         // eyx
         triangles.add(new Triangle(
             new Vertex(-GOLDEN,       0,    -100),
@@ -139,6 +145,7 @@ public class Sphere extends Mesh {
             new Vertex(      0,     100, -GOLDEN),
             colors[16])
         );
+
         // wex
         triangles.add(new Triangle(
             new Vertex(      0,    -100, -GOLDEN),
@@ -146,6 +153,7 @@ public class Sphere extends Mesh {
             new Vertex(      0,     100, -GOLDEN),
             colors[17])
         );
+
         // cwx
         triangles.add(new Triangle(
             new Vertex( GOLDEN,       0,    -100),
@@ -153,6 +161,7 @@ public class Sphere extends Mesh {
             new Vertex(      0,     100, -GOLDEN),
             colors[18])
         );
+
         // zcx
         triangles.add(new Triangle(
             new Vertex(    100,  GOLDEN,       0),
@@ -173,6 +182,5 @@ public class Sphere extends Mesh {
         // Vertex d = new Vertex( GOLDEN,       0,     100);
         // Vertex e = new Vertex(-GOLDEN,       0,    -100);
         // Vertex f = new Vertex(-GOLDEN,       0,     100);
-
     }
 }
