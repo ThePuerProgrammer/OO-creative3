@@ -1,11 +1,12 @@
 package model;
 
 import java.util.ArrayList;
-
-import view.GamePanel3D;
+import java.util.Random;
 
 import java.awt.Graphics2D;
 import java.awt.Color;
+
+import view.GamePanel3D;
 
 public class Mesh {
 
@@ -17,22 +18,37 @@ public class Mesh {
     private double[][] yRotationMatrix;
     private int midX = GamePanel3D.WINDOW_WIDTH / 2;
     private int midY = GamePanel3D.WINDOW_HEIGHT / 2;
-
-    private static double scale = 1.0;
-    private final int shiftSpeed = 5;
     private int headingSpeed = 2;
-    private final int vertSize = 10;
 
     private enum RenderState {
         TRIS, SOLID, VERT
     }
 
     private static RenderState renderState;
+    private static double scale = 1.0;
+    public static int numOfMeshes = 0;
+
+    private final int shiftSpeed = 5;
+    private final int vertSize = 10;
+
     protected ArrayList<Triangle> triangles;
+    protected Color[] colors;
+    protected Random random;
 
     public Mesh() {
         triangles = new ArrayList<>();
         setRenderState(2);
+        colors = new Color[6];
+        random = new Random();
+
+        for (int i = 0; i < 6; i++) {
+            int r = random.nextInt(155) + 100;
+            int g = random.nextInt(155) + 100;
+            int b = random.nextInt(155) + 100;
+            colors[i] = new Color(r, g, b);
+        }
+
+        numOfMeshes++;
     }
 
     public void addTriangle(Triangle t) {
@@ -45,7 +61,7 @@ public class Mesh {
             // Verticies only!
             g2.setColor(Color.GREEN);
             for (var e: triangles) {
-                int[] scaled = scaleTriangleVertex(e);
+                int[] scaled = scaleTriangleVertices(e);
                 g2.fillOval(scaled[0], scaled[1], vertSize, vertSize);
                 g2.fillOval(scaled[3], scaled[4], vertSize, vertSize);
                 g2.fillOval(scaled[6], scaled[7], vertSize, vertSize);
@@ -54,7 +70,7 @@ public class Mesh {
             // lines only!
             for (var e: triangles) {
                 g2.setColor(new Color(50, 40, 200));
-                int[] scaled = scaleTriangleVertex(e);                
+                int[] scaled = scaleTriangleVertices(e);                
                 g2.drawLine(scaled[0], scaled[1], scaled[3], scaled[4]);
                 g2.drawLine(scaled[0], scaled[1], scaled[6], scaled[7]);
             }
@@ -62,7 +78,7 @@ public class Mesh {
             int i = 20;
             for (var e: triangles) {
                 Vertex normal = VMath.normalVectorN(e.getA(), e.getB(), e.getC());
-                int[] scaled = scaleTriangleVertex(e);
+                int[] scaled = scaleTriangleVertices(e);
                 if (normal.getZ() > 0.0) {
                     g2.setColor(e.getColor());
                     // FILL THE TRIANGLES! Woo!
@@ -82,7 +98,7 @@ public class Mesh {
         }
     }
 
-    public int[] scaleTriangleVertex(Triangle e) {
+    public int[] scaleTriangleVertices(Triangle e) {
         int[] result = new int[9];
         result[0] = (int)(e.getA().getX() * scale); 
         result[1] = (int)(e.getA().getY() * scale); 
@@ -126,9 +142,9 @@ public class Mesh {
     private void updateHeading(int direction) {
         assert(direction == -1 || direction == 1);
         if (direction == -1) {
-            heading = headingSpeed;
-        } else {
             heading = -headingSpeed;
+        } else {
+            heading =  headingSpeed;
         }
         cosTheta = Math.cos(Math.toRadians(heading));
         sinTheta = Math.sin(Math.toRadians(heading));
@@ -216,5 +232,7 @@ public class Mesh {
         return triangles;
     }
 
-
+    public static RenderState getRenderState() {
+        return renderState;
+    }
 }

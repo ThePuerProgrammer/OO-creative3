@@ -161,7 +161,16 @@ public class GameListener implements KeyListener, MouseListener {
             Mesh.setRenderState(1);
         } else if ((x >= 130 && x <= 180) && (y >= 740 && y <= 790)) {
             Mesh.setRenderState(2);
-        }
+        } else if ((x >= 620 && x <= 670) && (y >= 740 && y <= 790)) {
+            gamePanel3D.clearCanvas();
+            // draw a SPHERE! YOU CAN DO IT!
+        } else if ((x >= 680 && x <= 730) && (y >= 740 && y <= 790)) {
+            gamePanel3D.clearCanvas();
+            gamePanel3D.addCubeToCanvas();
+        } else if ((x >= 740 && x <= 790) && (y >= 740 && y <= 790)) {
+            gamePanel3D.clearCanvas();
+            gamePanel3D.addPyramidToCanvas();
+        } 
 
     }
 

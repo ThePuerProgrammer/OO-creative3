@@ -159,4 +159,16 @@ public class GamePanel3D implements Runnable {
     public void setShiftRight(boolean shiftRight) {
         this.shiftRight = shiftRight;
     }
+
+    public void addCubeToCanvas() {
+        gameCanvas3D.addCube();
+    }
+
+    public void addPyramidToCanvas() {
+        gameCanvas3D.addPyramid();
+    }
+
+    public void clearCanvas() {
+        gameCanvas3D.removeAllMeshes();
+    }
 }

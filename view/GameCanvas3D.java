@@ -12,6 +12,7 @@ import java.awt.Font;
 
 import model.Cube;
 import model.Mesh;
+import model.Pyramid;
 
 public class GameCanvas3D extends JPanel {
     private String fps = "hi";
@@ -20,6 +21,9 @@ public class GameCanvas3D extends JPanel {
     private ArrayList<Mesh> meshes;
     private GamePanel3D gamePanel3D;
     private Graphics2D g2;
+    private final int[] triangleIconX = {740, 765, 790};
+    private final int[] triangleIconY = {790, 740, 790};
+    private final Color shapeIconColor;
 
     public GameCanvas3D(GamePanel3D gamePanel3D) {
         this.gamePanel3D = gamePanel3D;
@@ -27,6 +31,7 @@ public class GameCanvas3D extends JPanel {
         setBackground(new Color(0 , 0, 10));
         meshes = new ArrayList<>();
         meshes.add(new Cube());
+        shapeIconColor = new Color(20, 120, 220);
     } 
 
     @Override
@@ -49,6 +54,11 @@ public class GameCanvas3D extends JPanel {
         g2.fillOval(150, 785, 5, 5);
         g2.fillOval(130, 785, 5, 5);
         g2.fillOval(130, 760, 5, 5);
+
+        g2.setColor(shapeIconColor);
+        g2.fillPolygon(triangleIconX, triangleIconY, 3);
+        g2.fillRect(680, 740, 50, 50);
+        g2.fillOval(620, 740, 50, 50);
 
 
         for (var e: meshes) {
@@ -123,5 +133,18 @@ public class GameCanvas3D extends JPanel {
 
     public void setString(String fps) {
         this.fps = fps;
+    }
+
+    public void addCube() {
+        meshes.add(new Cube());
+    }
+
+    public void addPyramid() {
+        meshes.add(new Pyramid());
+    }
+
+    public void removeAllMeshes() {
+        Mesh.numOfMeshes--;
+        meshes.clear();
     }
 }
