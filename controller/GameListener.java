@@ -183,6 +183,8 @@ public class GameListener implements KeyListener, MouseListener {
             gamePanel3D.addOctahedronToCanvas();
             Mesh.resetScale();
             GameCanvas3D.triangleIconColor = Color.WHITE;
+        } else if ((x >= 560 && x <= 610) && (y >= 740 && y <= 790)) {
+            GameCanvas3D.coordinateIconColor = Color.WHITE;
         } 
     }
 
@@ -203,6 +205,13 @@ public class GameListener implements KeyListener, MouseListener {
             GameCanvas3D.squareIconColor = icons;
         } else if ((x >= 740 && x <= 790) && (y >= 740 && y <= 790)) {
             GameCanvas3D.triangleIconColor = icons;
+        } else if ((x >= 560 && x <= 610) && (y >= 740 && y <= 790)) {
+            if (Mesh.coordinates) {
+                Mesh.coordinates = false;
+            } else {
+                Mesh.coordinates = true;
+            }
+            GameCanvas3D.coordinateIconColor = new Color(200, 10, 200);
         } 
     }
 

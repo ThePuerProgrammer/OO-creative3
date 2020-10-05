@@ -5,6 +5,7 @@ import java.util.Random;
 
 import java.awt.Graphics2D;
 import java.awt.Color;
+import java.awt.Font;
 
 import view.GamePanel3D;
 
@@ -27,6 +28,7 @@ public class Mesh {
 
     private static RenderState renderState;
     private static double scale = 1.0;
+    public static boolean coordinates = false;
     public static int numOfMeshes = 0;
 
     private final int SHIFT_SPEED = 5;
@@ -66,7 +68,6 @@ public class Mesh {
                 g2.fillOval(scaled[0] - VERT_OFFSET, scaled[1] - VERT_OFFSET, VERT_SIZE, VERT_SIZE);
                 g2.fillOval(scaled[3] - VERT_OFFSET, scaled[4] - VERT_OFFSET, VERT_SIZE, VERT_SIZE);
                 g2.fillOval(scaled[6] - VERT_OFFSET, scaled[7] - VERT_OFFSET, VERT_SIZE, VERT_SIZE);
-
             }
         } else if (renderState == RenderState.TRIS) {
             // lines only!
@@ -75,6 +76,7 @@ public class Mesh {
                 int[] scaled = scaleTriangleVertices(e);                
                 g2.drawLine(scaled[0], scaled[1], scaled[3], scaled[4]);
                 g2.drawLine(scaled[0], scaled[1], scaled[6], scaled[7]);
+                g2.drawLine(scaled[3], scaled[4], scaled[6], scaled[7]);
             }
         } else if (renderState == RenderState.SOLID) {
             int i = 20;
@@ -88,13 +90,16 @@ public class Mesh {
                     int[] yPoints = {scaled[1], scaled[4], scaled[7]};
                     g2.fillPolygon(xPoints, yPoints, 3);
                     // print coordinates
-                    g2.drawString(
-                        "aX: " + scaled[0] + ", aY: " + scaled[1] + ", aZ: " + scaled[2] +
-                        ", bX: " + scaled[3] + ", bY: " + scaled[4] + ", bZ: " + scaled[5] +
-                        ", cX: " + scaled[6] + ", cY: " + scaled[7] + ", cZ: " + scaled[8], 
-                        -390, -390 + i
-                    );
-                    i += 15;
+                    if (coordinates) {
+                        g2.setFont(new Font("courier", Font.PLAIN, 12));
+                        g2.drawString(
+                            "aX: " + scaled[0] + ", aY: " + scaled[1] + ", aZ: " + scaled[2] +
+                            ", bX: " + scaled[3] + ", bY: " + scaled[4] + ", bZ: " + scaled[5] +
+                            ", cX: " + scaled[6] + ", cY: " + scaled[7] + ", cZ: " + scaled[8], 
+                            -390, -390 + i
+                        );
+                        i += 15;
+                    }
                 }
             }
         }
@@ -240,5 +245,5 @@ public class Mesh {
 
     public static RenderState getRenderState() {
         return renderState;
-    }
+    }  
 }

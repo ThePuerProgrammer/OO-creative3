@@ -31,6 +31,7 @@ public class GameCanvas3D extends JPanel {
     public static Color squareIconColor;
     public static Color triangleIconColor;
     public static Color sphereIconColor;
+    public static Color coordinateIconColor;
     public static Color wireframeColor;
     public static Color solidColor;
     public static Color vertexOnlyColor;
@@ -43,6 +44,7 @@ public class GameCanvas3D extends JPanel {
         meshes.add(new Cube());
         sphereIconColor = triangleIconColor = squareIconColor = new Color(20, 150, 160);
         vertexOnlyColor = solidColor = wireframeColor = Color.RED;
+        coordinateIconColor = new Color(200, 10, 200);
     } 
 
     @Override
@@ -75,13 +77,13 @@ public class GameCanvas3D extends JPanel {
         g2.fillRect(70, 740, 50, 50);
         g2.setColor(vertexOnlyColor);
         g2.fillOval(130, 740, 5, 5);
-        g2.fillOval(150, 740, 5, 5);
+        g2.fillOval(152, 740, 5, 5);
         g2.fillOval(175, 740, 5, 5);
-        g2.fillOval(175, 760, 5, 5);
+        g2.fillOval(175, 762, 5, 5);
         g2.fillOval(175, 785, 5, 5);
-        g2.fillOval(150, 785, 5, 5);
+        g2.fillOval(152, 785, 5, 5);
         g2.fillOval(130, 785, 5, 5);
-        g2.fillOval(130, 760, 5, 5);
+        g2.fillOval(130, 762, 5, 5);
 
         g2.setColor(triangleIconColor);
         g2.fillPolygon(TRIANGLE_ICON_X, TRIANGLE_ICON_Y, 3);
@@ -89,6 +91,10 @@ public class GameCanvas3D extends JPanel {
         g2.fillRect(680, 740, 50, 50);
         g2.setColor(sphereIconColor);
         g2.fillOval(620, 740, 50, 50);
+        g2.setColor(coordinateIconColor);
+        g2.setFont(new Font("courier", Font.BOLD, 30));
+        g2.drawString("X Y", 560, 760);
+        g2.drawString(" Z ", 560, 785);
 
 
         for (var e: meshes) {
