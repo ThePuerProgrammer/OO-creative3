@@ -79,7 +79,7 @@ public class Mesh {
                 g2.drawLine(scaled[3], scaled[4], scaled[6], scaled[7]);
             }
         } else if (renderState == RenderState.SOLID) {
-            int i = 20;
+            int i = 5;
             for (var e: triangles) {
                 Vertex normal = VMath.normalVectorN(e.getA(), e.getB(), e.getC());
                 int[] scaled = scaleTriangleVertices(e);

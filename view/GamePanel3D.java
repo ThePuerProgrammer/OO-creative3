@@ -73,7 +73,6 @@ public class GamePanel3D implements Runnable {
             gameCanvas3D.repaint();
             long updated = System.nanoTime() - nano;
             long buffer = TIME - updated / 1_000_000;
-            gameCanvas3D.setString("buffer: " + buffer + ", nano: " + nano + ", updated: " + updated);
             if (buffer <= 0) {
                 buffer = 5;
             }

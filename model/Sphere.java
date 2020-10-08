@@ -2,10 +2,6 @@ package model;
 
 public class Sphere extends Mesh {
     
-    private final double PI = 3.141592653589;
-    private final double RADIUS = 100.0;
-    private final double DIAMETER = 2 * RADIUS;
-    private final double CIRCUMFERENCE = 2 * PI * RADIUS;
     private final double GOLDEN_RATIO = 1.61803399 * 100;
 
     // The big leagues
